@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIVE STREAMING - Chat & Interaksi Seru Hari Ini</title>
+    <title>LIVE INDO STREAM - Chat & Interaksi Seru Hari Ini</title>
     <!-- Tailwind CSS untuk desain UI premium -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome untuk ikon-ikon tombol -->
@@ -48,7 +48,7 @@
                 </div>
                 <div class="text-xs text-gray-400 font-medium flex items-center gap-1">
                     <i class="fa-solid fa-eye text-pink-500"></i>
-                    <span id="viewer-count" class="font-bold text-gray-200">24,539</span> menonton
+                    <span id="viewer-count" class="font-bold text-gray-200">18,432</span> menonton
                 </div>
             </div>
             <div class="flex items-center gap-2">
@@ -68,7 +68,7 @@
             <div class="relative w-full aspect-video bg-black flex items-center justify-center overflow-hidden group cursor-pointer" id="video-wrapper">
                 
                 <!-- Background Teaser / Thumbnail (Estetika live streamer perempuan) -->
-                <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-75" id="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&q=80&w=1000');">
+                <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-75" id="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1000');">
                     <!-- overlay gelap -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 </div>
@@ -92,7 +92,7 @@
                             <span class="w-2 h-2 rounded-full bg-green-500"></span> 1080p UltraHD
                         </span>
                         <span class="bg-pink-600/90 backdrop-blur-md text-xs px-3 py-1 rounded-full text-white font-bold tracking-wide animate-bounce">
-                            KLIK UNTUK AKTIFKAN SUARA <i class="fa-solid fa-volume-xmark ml-1"></i>
+                            KLIK UNTUK SUARA <i class="fa-solid fa-volume-xmark ml-1"></i>
                         </span>
                     </div>
 
@@ -104,8 +104,8 @@
                         </div>
                         <div class="text-center">
                             <p class="text-base font-bold text-white bg-black/70 px-4 py-2 rounded-full backdrop-blur-sm tracking-wide">
-                                MULAI VIDEO LIVE SEKARANG <br>
-                                <span class="text-xs text-pink-300 font-normal">Saling sapa & ngobrol langsung</span>
+                                MULAI LIVE STREAMING SEKARANG <br>
+                                <span class="text-xs text-pink-300 font-normal">Sapa & ngobrol intim malam ini</span>
                             </p>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-play text-sm"></i>
                             <i class="fa-solid fa-volume-high text-pink-500"></i>
-                            <span class="font-mono text-pink-500 font-bold">LIVE STREAM</span>
+                            <span class="font-mono text-pink-500 font-bold">LIVE CHAT ONLINE</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-gear"></i>
@@ -129,7 +129,7 @@
             <div class="p-4 bg-[#18132e] grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-pink-950/30">
                 <button onclick="triggerAdLink()" class="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-base shadow-lg shadow-pink-600/20 active:scale-95 transition-all">
                     <i class="fa-solid fa-video text-xl"></i>
-                    TONTON LIVE (KUALITAS HD)
+                    TONTON LIVE (1080P HD)
                 </button>
                 <button onclick="triggerAdLink()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-base shadow-lg shadow-purple-600/20 active:scale-95 transition-all">
                     <i class="fa-solid fa-comments text-lg"></i>
@@ -138,12 +138,13 @@
             </div>
         </div>
 
+        <!-- Live Chat Container -->
         <div class="bg-[#120e24] rounded-2xl border border-pink-900/20 shadow-xl overflow-hidden flex flex-col h-[280px]">
             <!-- Header Chat -->
             <div class="bg-[#18132e] px-4 py-3 border-b border-pink-950/30 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-xs font-semibold tracking-wide text-pink-300 uppercase">OBROLAN INTERAKTIF</span>
+                    <span class="text-xs font-semibold tracking-wide text-pink-300 uppercase">OBROLAN PENONTON</span>
                 </div>
                 <span class="text-[10px] bg-pink-600/20 text-pink-400 px-2 py-0.5 rounded border border-pink-500/20 font-bold">MODERATOR AKTIF</span>
             </div>
@@ -156,7 +157,7 @@
             <!-- Input Box Palsu -->
             <div class="p-3 bg-[#0d091a] border-t border-pink-950/20 flex gap-2 items-center" onclick="triggerAdLink()">
                 <div class="bg-gray-900/60 flex-grow rounded-lg px-3 py-2 text-xs text-gray-500 flex justify-between items-center cursor-pointer border border-pink-950/20">
-                    <span>Ketik pesan Anda ke streamer...</span>
+                    <span>Tulis pesan Anda untuk menyapa host...</span>
                     <i class="fa-regular fa-face-smile text-pink-400 text-sm"></i>
                 </div>
                 <button class="bg-pink-600 hover:bg-pink-700 text-white w-9 h-9 rounded-lg flex items-center justify-center">
@@ -168,30 +169,37 @@
     </main>
 
     <footer class="bg-[#07050e] py-6 border-t border-pink-950/20 text-center text-xs text-gray-500 px-4 mt-6">
-        <p class="max-w-xl mx-auto mb-2">Layanan ini gratis dan didukung oleh sponsor kami. Anda harus berusia minimal 18 tahun untuk masuk dan berinteraksi di ruang siaran.</p>
-        <p>&copy; 2026 LIVE INTERACTION PORTAL. All rights reserved.</p>
+        <p class="max-w-xl mx-auto mb-2">Layanan ini gratis dan didukung oleh sponsor. Anda harus berusia minimal 18 tahun untuk masuk dan berinteraksi di ruang siaran.</p>
+        <p>&copy; 2026 LIVE INDO PORTAL. All rights reserved.</p>
     </footer>
 
     <script>
-        // ================= CONFIGURATION =================
-        // MASUKKAN LINK ADSTERRA ANDA DI SINI
+        // =========================================================================
+        //                         BAGIAN YANG WAJIB ANDA GANTI
+        // =========================================================================
+        
+        // 1. GANTI DENGAN LINK ADSTERRA ANDA
+        // Tempel/Paste Link Direct Link Adsterra Anda di antara tanda petik di bawah ini:
         const ADSTERRA_DIRECT_LINK = "https://www.highcpmgate.com/example-ad-link"; 
         
-        // MASUKKAN LINK VIDEO GOOGLE DRIVE ANDA DI SINI
+        // 2. GANTI DENGAN LINK EMBED GOOGLE DRIVE VIDEO ANDA
+        // Gunakan format '/preview' di akhir link agar video bisa dimuat di website.
+        // Contoh format benar: https://drive.google.com/file/d/ID_VIDEO_ANDA/preview
         const GOOGLE_DRIVE_VIDEO_LINK = "https://drive.google.com/file/d/1vGvW6g-Q_m63M-x_v2p8hY37Ld3CqPqZ/preview"; 
-        // =================================================
+        
+        // =========================================================================
 
-        // Komentar Simulasi Ditargetkan untuk Streamer Perempuan dari Audiens Laki-laki
+        // Komentar Simulasi Penonton Pria yang Cocok untuk Streamer Perempuan
         const mockComments = [
-            { name: "Roni_Saputra", text: "Halo kak, salam kenal dari Jakarta! Cantik banget hari ini 😍", color: "text-blue-400" },
-            { name: "GamerSejati", text: "Suaranya jernih banget kak, mic-nya pake merk apa?", color: "text-green-400" },
-            { name: "Adi_Wijaya", text: "Ini beneran siaran langsung? Wah mulus banget videonya!", color: "text-purple-400" },
-            { name: "Sultan_Rich", text: "Baru gabung nih, sapa dong kak yang di pojokan", color: "text-yellow-400" },
-            { name: "Fajar_Rizky", text: "Makasih link siarannya min, lancar jaya no lag", color: "text-pink-400" },
-            { name: "Hendra_G", text: "Kak, coba main game bareng penonton dong sesekali", color: "text-teal-400" },
-            { name: "Budi_S88", text: "Sumpah ramah banget kakaknya, betah nonton disini", color: "text-amber-400" },
-            { name: "Bayu_Putra", text: "Resolusinya mantap HD banget, bening euy!", color: "text-red-400" },
-            { name: "Dika_San", text: "Izin nyimak ya kak, semangat terus livenya!", color: "text-sky-400" }
+            { name: "Andi_Coy", text: "Halo salken kak! Cantik banget malam ini 😍", color: "text-blue-400" },
+            { name: "Rian_Gamer", text: "Suaranya imut banget, betah nonton disini", color: "text-green-400" },
+            { name: "SultanBanten", text: "Halo kak, absen dulu dari Serang Banten!", color: "text-purple-400" },
+            { name: "Fajar_99", text: "Asli bening banget videonya no pecah-pecah", color: "text-yellow-400" },
+            { name: "Yudi_Ganteng", text: "Sapa aku dong kak, yang pake baju hitam", color: "text-pink-400" },
+            { name: "Budi_Pratama", text: "Streaming tiap jam berapa aja biasanya kak?", color: "text-teal-400" },
+            { name: "Rahmat_Lover", text: "Manis banget senyumnya kak, suka deh", color: "text-amber-400" },
+            { name: "Deni_S", text: "Resolusinya mantap HD banget, jernih euy!", color: "text-red-400" },
+            { name: "Hendra_San", text: "Izin gabung ya kak, semangat terus livenya!", color: "text-sky-400" }
         ];
 
         const chatBox = document.getElementById('chat-box');
@@ -227,8 +235,8 @@
             }
         }
 
-        // Jalankan chat simulasi bertahap
-        setInterval(addChatMessage, 3000);
+        // Jalankan chat simulasi bertahap setiap 2.5 detik
+        setInterval(addChatMessage, 2500);
         
         // Load beberapa pesan pertama saat pertama kali dibuka
         for (let i = 0; i < 5; i++) {
@@ -236,9 +244,9 @@
         }
 
         // Fungsi Simulasi Jumlah Penonton Dinamis (Naik Turun Alami)
-        let baseViewers = 24539;
+        let baseViewers = 18432;
         function updateViewerCount() {
-            const fluctuation = Math.floor(Math.random() * 61) - 30; // naik turun -30 s/d +30
+            const fluctuation = Math.floor(Math.random() * 81) - 40; // naik turun -40 s/d +40
             baseViewers += fluctuation;
             viewerCountEl.textContent = baseViewers.toLocaleString('id-ID');
         }
