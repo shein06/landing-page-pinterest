@@ -24,7 +24,21 @@
         .live-pulse {
             animation: pulse 1.5s infinite;
         }
-        /* Kustom scrollbar untuk live chat */
+        /* Animasi munculnya chat baru */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-chat {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+        /* Kustom scrollbar untuk live chat agar rapi */
         .chat-container::-webkit-scrollbar {
             width: 4px;
         }
@@ -67,198 +81,14 @@
             <!-- Video Player Screen Mockup -->
             <div class="relative w-full aspect-video bg-black flex items-center justify-center overflow-hidden group cursor-pointer" id="video-wrapper">
                 
-                <!-- Background Teaser / Thumbnail (Estetika live streamer perempuan) -->
+                <!-- Background Teaser / Thumbnail (Gamer/Streamer Perempuan) -->
                 <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-75" id="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1000');">
                     <!-- overlay gelap -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 </div>
 
                 <!-- Google Drive Video Iframe -->
-                <div id="drive-player-container" class="absolute inset-0 w-full h-full hidden pointer-events-none">
-                    <!-- Iframe video google drive dimasukkan secara dinamis di sini -->
-                </div>
-
-                <!-- Skenario Loading Palsu -->
-                <div id="video-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-black/95 hidden z-20">
-                    <div class="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin mb-3"></div>
-                    <p class="text-sm font-semibold tracking-wider text-gray-300">MENGHUBUNGKAN SIARAN...</p>
-                </div>
-
-                <!-- Overlay Kontrol Palsu (Sebelum di-klik) -->
-                <div id="player-overlay" class="absolute inset-0 flex flex-col justify-between p-4 z-10">
-                    <!-- Bagian Atas: Info Kualitas -->
-                    <div class="flex justify-between items-start">
-                        <span class="bg-black/70 backdrop-blur-md text-xs px-2.5 py-1 rounded-full text-pink-400 border border-pink-500/20 font-mono flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-green-500"></span> 1080p UltraHD
-                        </span>
-                        <span class="bg-pink-600/90 backdrop-blur-md text-xs px-3 py-1 rounded-full text-white font-bold tracking-wide animate-bounce">
-                            KLIK UNTUK SUARA <i class="fa-solid fa-volume-xmark ml-1"></i>
-                        </span>
-                    </div>
-
-                    <!-- Bagian Tengah: Tombol Play Raksasa -->
-                    <div class="self-center flex flex-col items-center gap-3">
-                        <div class="w-20 h-20 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-2xl shadow-pink-600/50 hover:scale-110 transition-transform duration-300 border-4 border-white/20 relative">
-                            <i class="fa-solid fa-play text-3xl ml-2"></i>
-                            <span class="absolute inset-0 rounded-full bg-pink-600/30 animate-ping"></span>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-base font-bold text-white bg-black/70 px-4 py-2 rounded-full backdrop-blur-sm tracking-wide">
-                                MULAI LIVE STREAMING SEKARANG <br>
-                                <span class="text-xs text-pink-300 font-normal">Sapa & ngobrol intim malam ini</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Bagian Bawah: Panel Kontrol Palsu -->
-                    <div class="w-full bg-gradient-to-t from-black/95 to-transparent p-2 rounded-lg flex items-center justify-between text-xs text-gray-300">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-play text-sm"></i>
-                            <i class="fa-solid fa-volume-high text-pink-500"></i>
-                            <span class="font-mono text-pink-500 font-bold">LIVE CHAT ONLINE</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-gear"></i>
-                            <i class="fa-solid fa-expand"></i>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="p-4 bg-[#18132e] grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-pink-950/30">
-                <button onclick="triggerAdLink()" class="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-base shadow-lg shadow-pink-600/20 active:scale-95 transition-all">
-                    <i class="fa-solid fa-video text-xl"></i>
-                    TONTON LIVE (1080P HD)
-                </button>
-                <button onclick="triggerAdLink()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-base shadow-lg shadow-purple-600/20 active:scale-95 transition-all">
-                    <i class="fa-solid fa-comments text-lg"></i>
-                    GABUNG LIVE CHAT SEKARANG
-                </button>
-            </div>
-        </div>
-
-        <!-- Live Chat Container -->
-        <div class="bg-[#120e24] rounded-2xl border border-pink-900/20 shadow-xl overflow-hidden flex flex-col h-[280px]">
-            <!-- Header Chat -->
-            <div class="bg-[#18132e] px-4 py-3 border-b border-pink-950/30 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-xs font-semibold tracking-wide text-pink-300 uppercase">OBROLAN PENONTON</span>
-                </div>
-                <span class="text-[10px] bg-pink-600/20 text-pink-400 px-2 py-0.5 rounded border border-pink-500/20 font-bold">MODERATOR AKTIF</span>
-            </div>
-
-            <!-- Pesan Obrolan (Auto Scroll) -->
-            <div id="chat-box" class="chat-container p-4 overflow-y-auto flex-grow flex flex-col gap-3 text-sm">
-                <!-- Komentar awal akan di-render oleh Javascript -->
-            </div>
-
-            <!-- Input Box Palsu -->
-            <div class="p-3 bg-[#0d091a] border-t border-pink-950/20 flex gap-2 items-center" onclick="triggerAdLink()">
-                <div class="bg-gray-900/60 flex-grow rounded-lg px-3 py-2 text-xs text-gray-500 flex justify-between items-center cursor-pointer border border-pink-950/20">
-                    <span>Tulis pesan Anda untuk menyapa host...</span>
-                    <i class="fa-regular fa-face-smile text-pink-400 text-sm"></i>
-                </div>
-                <button class="bg-pink-600 hover:bg-pink-700 text-white w-9 h-9 rounded-lg flex items-center justify-center">
-                    <i class="fa-solid fa-paper-plane text-xs"></i>
-                </button>
-            </div>
-        </div>
-
-    </main>
-
-    <footer class="bg-[#07050e] py-6 border-t border-pink-950/20 text-center text-xs text-gray-500 px-4 mt-6">
-        <p class="max-w-xl mx-auto mb-2">Layanan ini gratis dan didukung oleh sponsor. Anda harus berusia minimal 18 tahun untuk masuk dan berinteraksi di ruang siaran.</p>
-        <p>&copy; 2026 LIVE INDO PORTAL. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // =========================================================================
-        //                         BAGIAN YANG WAJIB ANDA GANTI
-        // =========================================================================
-        
-        // 1. GANTI DENGAN LINK ADSTERRA ANDA
-        // Tempel/Paste Link Direct Link Adsterra Anda di antara tanda petik di bawah ini:
-        const ADSTERRA_DIRECT_LINK = "https://www.effectivecpmnetwork.com/tm7bvag3?key=f101de295b9985fe4047b1c33ccaab3b"; 
-        
-        // 2. GANTI DENGAN <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIVE INDO STREAM - Chat & Interaksi Seru Hari Ini</title>
-    <!-- Tailwind CSS untuk desain UI premium -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome untuk ikon-ikon tombol -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter & Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0b0914;
-        }
-        /* Efek kedip untuk indikator LIVE */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        .live-pulse {
-            animation: pulse 1.5s infinite;
-        }
-        /* Kustom scrollbar untuk live chat */
-        .chat-container::-webkit-scrollbar {
-            width: 4px;
-        }
-        .chat-container::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-        }
-        .chat-container::-webkit-scrollbar-thumb {
-            background: rgba(236, 72, 153, 0.3);
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body class="text-gray-100 flex flex-col min-h-screen justify-between">
-
-    <header class="bg-[#120e24]/90 border-b border-pink-900/30 py-3 px-4 sticky top-0 z-50 shadow-md backdrop-blur-md">
-        <div class="max-w-4xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="bg-pink-600 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1.5 uppercase shadow-lg shadow-pink-600/30">
-                    <span class="w-2 h-2 rounded-full bg-white live-pulse"></span>
-                    LIVE
-                </div>
-                <div class="text-xs text-gray-400 font-medium flex items-center gap-1">
-                    <i class="fa-solid fa-eye text-pink-500"></i>
-                    <span id="viewer-count" class="font-bold text-gray-200">18,432</span> menonton
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="text-xs sm:text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-                    <i class="fa-solid fa-circle-check text-pink-500 mr-1"></i>VERIFIED STREAMER
-                </span>
-            </div>
-        </div>
-    </header>
-
-    <main class="flex-grow max-w-4xl w-full mx-auto p-2 sm:p-4 flex flex-col gap-4">
-        
-        <!-- Wadah Utama Player -->
-        <div class="bg-[#120e24] rounded-2xl overflow-hidden border border-pink-900/20 shadow-2xl relative">
-            
-            <!-- Video Player Screen Mockup -->
-            <div class="relative w-full aspect-video bg-black flex items-center justify-center overflow-hidden group cursor-pointer" id="video-wrapper">
-                
-                <!-- Background Teaser / Thumbnail (Estetika live streamer perempuan) -->
-                <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-75" id="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1000');">
-                    <!-- overlay gelap -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                </div>
-
-                <!-- Google Drive Video Iframe -->
-                <div id="drive-player-container" class="absolute inset-0 w-full h-full hidden pointer-events-none">
+                <div id="drive-player-container" class="absolute inset-0 w-full h-full hidden">
                     <!-- Iframe video google drive dimasukkan secara dinamis di sini -->
                 </div>
 
@@ -396,7 +226,7 @@
         function addChatMessage() {
             const randomComment = mockComments[Math.floor(Math.random() * mockComments.length)];
             const messageElement = document.createElement('div');
-            messageElement.className = 'flex flex-col bg-pink-950/10 p-2.5 rounded-xl border border-pink-950/20 animate-[slideUp_0.3s_ease-out]';
+            messageElement.className = 'flex flex-col bg-pink-950/10 p-2.5 rounded-xl border border-pink-950/20 animate-chat';
             messageElement.innerHTML = `
                 <div class="flex items-center gap-1.5 mb-1">
                     <span class="w-1.5 h-1.5 rounded-full bg-pink-500"></span>
@@ -435,116 +265,7 @@
 
         // Fungsi Utama Pengalihan Adsterra (Tab Baru) & Putar Video Asli
         function triggerAdLink() {
-            // Membuka Direct Link Adsterra di Tab Baru
-            window.open(ADSTRA_DIRECT_LINK || ADSTERRA_DIRECT_LINK, '_blank');
-            
-            // Putar video asli jika belum berjalan
-            if (!isVideoLoaded) {
-                playMockVideo();
-            }
-        }
-
-        // Fungsi Menampilkan Video Google Drive Setelah Klik Pertama
-        function playMockVideo() {
-            isVideoLoaded = true;
-            playerOverlay.classList.add('hidden');
-            videoLoading.classList.remove('hidden');
-
-            // Simulasi buffering palsu 2 detik agar terkesan nyata
-            setTimeout(() => {
-                videoLoading.classList.add('hidden');
-                drivePlayerContainer.classList.remove('hidden');
-                // PENTING: Hapus pointer-events-none agar user bisa mengklik kontrol asli video (Play/Pause, Fullscreen) di Google Drive
-                drivePlayerContainer.classList.remove('pointer-events-none');
-                
-                // Masukkan iframe Google Drive dengan izin autoplay
-                drivePlayerContainer.innerHTML = `
-                    <iframe src="${GOOGLE_DRIVE_VIDEO_LINK}" class="w-full h-full border-0" allow="autoplay" allowfullscreen></iframe>
-                `;
-            }, 2000);
-        }
-
-        // Daftarkan event click di area pemutar video
-        videoWrapper.addEventListener('click', () => {
-            if (!isVideoLoaded) {
-                triggerAdLink();
-            }
-        });
-    </script>
-</body>
-</html>LINK EMBED GOOGLE DRIVE VIDEO ANDA
-        // Gunakan format '/preview' di akhir link agar video bisa dimuat di website.
-        // Contoh format benar: https://drive.google.com/file/d/ID_VIDEO_ANDA/preview
-        const GOOGLE_DRIVE_VIDEO_LINK = "https://drive.google.com/file/d/19VcMBffR_LoRY-cnBIgktE6_U8ZMNkoG/preview"; 
-        
-        // =========================================================================
-
-        // Komentar Simulasi Penonton Pria yang Cocok untuk Streamer Perempuan
-        const mockComments = [
-            { name: "Andi_Coy", text: "Halo salken kak! Cantik banget malam ini 😍", color: "text-blue-400" },
-            { name: "Rian_Gamer", text: "Suaranya imut banget, betah nonton disini", color: "text-green-400" },
-            { name: "SultanBanten", text: "Halo kak, absen dulu dari Serang Banten!", color: "text-purple-400" },
-            { name: "Fajar_99", text: "Asli bening banget videonya no pecah-pecah", color: "text-yellow-400" },
-            { name: "Yudi_Ganteng", text: "Sapa aku dong kak, yang pake baju hitam", color: "text-pink-400" },
-            { name: "Budi_Pratama", text: "Streaming tiap jam berapa aja biasanya kak?", color: "text-teal-400" },
-            { name: "Rahmat_Lover", text: "Manis banget senyumnya kak, suka deh", color: "text-amber-400" },
-            { name: "Deni_S", text: "Resolusinya mantap HD banget, jernih euy!", color: "text-red-400" },
-            { name: "Hendra_San", text: "Izin gabung ya kak, semangat terus livenya!", color: "text-sky-400" }
-        ];
-
-        const chatBox = document.getElementById('chat-box');
-        const viewerCountEl = document.getElementById('viewer-count');
-        const videoWrapper = document.getElementById('video-wrapper');
-        const playerOverlay = document.getElementById('player-overlay');
-        const videoLoading = document.getElementById('video-loading');
-        const drivePlayerContainer = document.getElementById('drive-player-container');
-
-        let isVideoLoaded = false;
-
-        // Fungsi Menampilkan Live Chat Baru Secara Dinamis
-        function addChatMessage() {
-            const randomComment = mockComments[Math.floor(Math.random() * mockComments.length)];
-            const messageElement = document.createElement('div');
-            messageElement.className = 'flex flex-col bg-pink-950/10 p-2.5 rounded-xl border border-pink-950/20 animate-[slideUp_0.3s_ease-out]';
-            messageElement.innerHTML = `
-                <div class="flex items-center gap-1.5 mb-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-pink-500"></span>
-                    <span class="font-bold text-xs ${randomComment.color}">${randomComment.name}</span>
-                    <span class="text-[9px] text-gray-500 ml-auto">${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}</span>
-                </div>
-                <p class="text-xs text-gray-200 leading-relaxed">${randomComment.text}</p>
-            `;
-            chatBox.appendChild(messageElement);
-            
-            // Auto scroll ke pesan paling bawah
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-            // Batasi jumlah pesan di DOM agar browser tetap ringan
-            if (chatBox.children.length > 20) {
-                chatBox.removeChild(chatBox.firstChild);
-            }
-        }
-
-        // Jalankan chat simulasi bertahap setiap 2.5 detik
-        setInterval(addChatMessage, 2500);
-        
-        // Load beberapa pesan pertama saat pertama kali dibuka
-        for (let i = 0; i < 5; i++) {
-            addChatMessage();
-        }
-
-        // Fungsi Simulasi Jumlah Penonton Dinamis (Naik Turun Alami)
-        let baseViewers = 18432;
-        function updateViewerCount() {
-            const fluctuation = Math.floor(Math.random() * 81) - 40; // naik turun -40 s/d +40
-            baseViewers += fluctuation;
-            viewerCountEl.textContent = baseViewers.toLocaleString('id-ID');
-        }
-        setInterval(updateViewerCount, 3000);
-
-        // Fungsi Utama Pengalihan Adsterra (Tab Baru) & Putar Video Asli
-        function triggerAdLink() {
-            // Membuka Direct Link Adsterra di Tab Baru
+            // Membuka Direct Link Adsterra di Tab Baru (Memperbaiki typo ADSTRA_DIRECT_LINK sebelumnya)
             window.open(ADSTERRA_DIRECT_LINK, '_blank');
             
             // Putar video asli jika belum berjalan
