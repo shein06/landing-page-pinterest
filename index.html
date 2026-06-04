@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-    <script src="https://bogavoidmemorize.com/05/77/9e/05779e90bb8e69616d3cdb2051c74dcd.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,11 +11,15 @@
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- =========================================================================
+         SCRIPT ANTI-BLOCK ADSTERRA ANDA (Diletakkan di Head agar terpasang paling awal)
+         ========================================================================= -->
+    <script src="https://bogavoidmemorize.com/05/77/9e/05779e90bb8e69616d3cdb2051c74dcd.js"></script>
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000;
-            /* Mencegah scrollbar muncul agar terasa seperti aplikasi native */
             overflow: hidden;
             height: 100dvh;
         }
@@ -49,7 +52,6 @@
         .chat-container {
             -ms-overflow-style: none;
             scrollbar-width: none;
-            /* Masking efek memudar di bagian atas chat box */
             -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
             mask-image: linear-gradient(to top, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
         }
@@ -70,10 +72,11 @@
                 Konten streaming ini mengandung unsur dewasa. Anda harus mengonfirmasi bahwa Anda berusia di atas <span class="text-pink-400 font-bold">18 tahun</span> untuk melanjutkan interaksi.
             </p>
             <div class="flex flex-col gap-2.5">
+                <!-- Setiap klik tombol di sini otomatis memicu script Popunder Adsterra Anda secara alami -->
                 <button onclick="confirmAge()" class="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl text-sm shadow-lg shadow-pink-600/30 transition-all active:scale-95">
                     SAYA SUDAH 18 TAHUN <i class="fa-solid fa-circle-check ml-1"></i>
                 </button>
-                <button onclick="triggerAdLink()" class="w-full bg-transparent border border-gray-700 text-gray-500 py-2 px-4 rounded-xl text-xs hover:text-gray-400 transition-all">
+                <button onclick="closeAgePopupOnly()" class="w-full bg-transparent border border-gray-700 text-gray-500 py-2 px-4 rounded-xl text-xs hover:text-gray-400 transition-all">
                     Laporkan Streaming
                 </button>
             </div>
@@ -85,7 +88,7 @@
     <!-- ========================================== -->
     <div class="absolute inset-0 w-full h-full z-0 bg-black">
         <video id="html5-video" class="w-full h-full object-cover" playsinline preload="auto" loop muted>
-            <!-- Secara otomatis mengarah ke file video lokal Anda di repo GitHub -->
+            <!-- File video lokal Anda yang diupload di GitHub -->
             <source id="video-source" src="video.mp4" type="video/mp4">
             Browser Anda tidak mendukung pemutar video ini.
         </video>
@@ -153,18 +156,18 @@
 
             <!-- Tombol Interaksi Cepat (Untuk Memancing Klik Iklan) -->
             <div class="grid grid-cols-2 gap-2 w-full max-w-md mx-auto">
-                <button onclick="triggerAdLink()" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs shadow-lg shadow-pink-600/20 active:scale-95 transition-all">
+                <button onclick="handleInteraction()" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-bold py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs shadow-lg shadow-pink-600/20 active:scale-95 transition-all">
                     <i class="fa-solid fa-video text-sm"></i>
                     TONTON LIVE HD
                 </button>
-                <button onclick="triggerAdLink()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs shadow-lg shadow-purple-600/20 active:scale-95 transition-all">
+                <button onclick="handleInteraction()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 text-xs shadow-lg shadow-purple-600/20 active:scale-95 transition-all">
                     <i class="fa-solid fa-comments text-sm"></i>
                     GABUNG LIVE CHAT
                 </button>
             </div>
 
             <!-- Kolom Tulis Pesan Palsu -->
-            <div class="flex gap-2 items-center w-full max-w-md mx-auto" onclick="triggerAdLink()">
+            <div class="flex gap-2 items-center w-full max-w-md mx-auto" onclick="handleInteraction()">
                 <div class="bg-black/60 backdrop-blur-md flex-grow rounded-xl px-3 py-2.5 text-[11px] text-gray-400 flex justify-between items-center cursor-pointer border border-white/10">
                     <span>Ketik pesan untuk menyapa host...</span>
                     <i class="fa-regular fa-face-smile text-pink-400 text-sm"></i>
@@ -186,11 +189,8 @@
         //                         PENGATURAN LANDING PAGE
         // =========================================================================
         
-        // 1. LINK DIRECT LINK ADSTERRA ANDA
-        const ADSTERRA_DIRECT_LINK = "https://bogavoidmemorize.com/tm7bvag3?key=f101de295b9985fe4047b1c33ccaab3b"; 
-        
-        // 2. NAMA FILE VIDEO LOKAL DI GITHUB (Satu folder dengan index.html)
-        const VIDEO_FILENAME = "vidio.mp4"; 
+        // NAMA FILE VIDEO LOKAL DI GITHUB (Satu folder dengan index.html)
+        const VIDEO_FILENAME = "video.mp4"; 
         
         // =========================================================================
 
@@ -234,10 +234,19 @@
         function confirmAge() {
             agePopup.classList.add('hidden');
             
-            // Buka Iklan Adsterra di Tab Baru
-            triggerAdLink();
+            // Jalankan video jika belum berputar
+            if (!isVideoLoaded) {
+                playNativeVideo();
+            }
             
             // Atur agar pop-up ini berulang terus setiap 10 detik sekali setelah ditutup
+            setTimeout(() => {
+                showAgePopup();
+            }, 10000);
+        }
+
+        function closeAgePopupOnly() {
+            agePopup.classList.add('hidden');
             setTimeout(() => {
                 showAgePopup();
             }, 10000);
@@ -247,7 +256,6 @@
         function addChatMessage() {
             const randomComment = mockComments[Math.floor(Math.random() * mockComments.length)];
             const messageElement = document.createElement('div');
-            // Menyerupai gaya chat gelembung transparan hitam melayang
             messageElement.className = 'bg-black/50 backdrop-blur-sm p-2 rounded-xl border border-white/5 animate-chat flex flex-col gap-0.5';
             messageElement.innerHTML = `
                 <div class="flex items-center gap-1">
@@ -281,9 +289,10 @@
         setInterval(updateViewerCount, 3000);
 
         // --- SISTEM PEMUTAR VIDEO DAN PENGALIHAN IKLAN ---
-        function triggerAdLink() {
-            // Membuka direct link iklan di tab baru
-            window.open(ADSTERRA_DIRECT_LINK, '_blank');
+        function handleInteraction() {
+            // Karena script anti-block Adsterra otomatis mengintercept setiap klik pada dokumen,
+            // kita tidak perlu memicu window.open secara manual lagi.
+            // Cukup jalankan fungsi pemutar video jika belum diputar.
             if (!isVideoLoaded) {
                 playNativeVideo();
             }
@@ -311,7 +320,7 @@
         // Daftarkan aksi klik pada seluruh area overlay tombol play tengah
         playerOverlay.addEventListener('click', function(e) {
             e.stopPropagation();
-            triggerAdLink();
+            handleInteraction();
         });
     </script>
 </body>
